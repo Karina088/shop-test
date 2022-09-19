@@ -1,0 +1,87 @@
+body {
+    background: url(img/gamerwall.jpg) no-repeat;
+    background-size: 100%;
+}
+
+* {
+    margin: 0;
+}
+
+.center {
+    margin: 0 auto;
+    max-width: 1140px;
+}
+
+.menu {
+    height: 56px;
+    display: flex;
+    justify-content: flex-end;
+    background-color: rgb(179, 204, 191);
+    opacity: 0.8;
+}
+
+.cart-button {
+    font-style: italic;
+    margin-top: 12px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 74px;
+    height: 28px;
+    background-color: lightgrey;
+    border-radius: 20px;
+    border: none;
+}
+
+.cart-button:hover,
+.cart-button_menu:hover {
+    background: rgb(152, 215, 235);
+    color: white;
+}
+
+.goods {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.goods-item {
+    opacity: 0.94;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 6px;
+    box-shadow: 10px 5px 5px rgb(91, 91, 118);
+    display: grid;
+    grid-template-columns: repeat(auto-fit 1fr);
+}
+
+.header_cart,
+.par {
+    padding: 12px 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.image {
+    width: 200px;
+}
+
+.button_add {
+    height: 44px;
+    width: 82px;
+    border-radius: 6px;
+    border: none;
+    margin-left: 12px;
+    margin-bottom: 12px;
+    color: grey;
+}
+
+.button_add:active {
+    background-color: azure;
+    border: 1px solid red;
+    color: red;
+}
+
+.goods-item:hover {
+    transform: scale(1.1);
+    transition: 0.4s;
+}
