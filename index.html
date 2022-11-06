@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eShop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+    <div id="app">
+
+        <header class="menu center">
+            <nav class="menu-left">
+                <!-- <img class="burger" src="img/icons8-menu.svg" alt="menu"> -->
+                <input @input="searchLine.length == 0 ? filterGoods() : null" v-model="searchLine" class="goods-search">
+                <button @click="filterGoods" class="search-button" type="button">Искать</button>
+                <!-- <button class="cart__button" type="button">Корзина</button> -->
+            </nav>
+            <nav class="menu-right">
+                <button type="button">
+                    <span class="cartWrap" @click="isVisibleCart=!isVisibleCart ">
+                        {{isVisibleCart ? '' : '' }}
+                        <img class="menu_cart" src="img/orange-cart.png" alt="cart">
+                        <span>{{cart}}</span>
+                    </span>
+                </button>
+                <div class="basket" v-if="isVisibleCart" contenteditable="false" v-for="good of filteredGoods">
+                    <div class="basketRow basketHeader">
+                        <div class="basket_li">Количество ({{cart}})</div>
+                        <div class="basket_li">Название товара
+                            <li>{{ good.product_name }}</li>
+                        </div>
+                        <div class="basket_li">Цена за шт. {{ good.price}}</div>
+                        <div class="basket_li">Итого:</div>
+                    </div>
+                    <div class="basketTotal">
+                        Товаров в корзине на сумму: {{ cart*good.price }}$
+                        <!--<span class="basketTotalValue">0</span> -->
+                        <button class="removeButton" @click="removeToBasket(good)">&times;</button>
+                    </div>
+
+                </div>
+            </nav>
+        </header>
+        <main class="center">
+            <div class="goods-list">
+                <div class="goods-item" v-for="good in filteredGoods">
+                    <h3 class="header_cart">{{ good.product_name }}</h3>
+                    <p class="par">{{ good.price }} $</p>
+                    <button @click="clickButtonAdd(good.product_name, good.price)" class="button_add">Добавить</button>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="lesson7.js"></script>
+
+</body>
+
+</html>
