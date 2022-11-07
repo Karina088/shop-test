@@ -64,7 +64,7 @@ const app = new Vue({
 
         /*clickButtonAdd(product_name, price) {
             console.log(product_name, price);
-            // return this.basket.push(this.goods); 
+            // return this.basket.push(this.goods);
             this.cart++;
         },*/
 
@@ -104,6 +104,7 @@ const app = new Vue({
 });
 
 console.log(app);
+
 
 
 /*
