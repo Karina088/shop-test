@@ -14,7 +14,7 @@ const renderProduct = (product, img = 'https://via.placeholder.com/200x150') => 
     return `<div class="product-item">
                 <img scr="${img}">
                 <h3>${product.title}</h3>
-                <p>${product.price}$</p>
+                <p class="product__text">${product.price}$</p>
                 <button class="buy-btn">Купить</button>
             </div>`
 };
