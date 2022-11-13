@@ -1,48 +1,45 @@
 'use strict';
 
-class ProductList {
+const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
+
+class ProductsList {
     constructor(container = '.products') {
         this.container = container;
         this.goods = [];
-        this.allProducts = [];
-        this._fetchProducts(); //рекомендация, чтобы метод был вызван в текущем классе
+        // this.allProducts = [];
+        this._getProducts()
+            .then(data => { // data - объект js
+                this.goods = data;
+                this.render()
+            });
     }
 
-    _fetchProducts() {
-        this.goods = [
-            { id: 1, title: 'Notebook', price: 2000 },
-            { id: 2, title: 'Mouse', price: 20 },
-            { id: 3, title: 'Keyboard', price: 200 },
-            { id: 4, title: 'Gamepad', price: 50 },
-        ];
+    _getProducts() {
+        return fetch(`${API}/catalogData.json`)
+            .then(result => result.json())
+            .catch(error => {
+                console.error(error);
+            });
     }
 
+    calcSum() {
+        return this.allProducts.reduce((acc, item) => acc + item.price, 0);
+    }
     render() {
         const block = document.querySelector(this.container);
         for (let product of this.goods) {
             const productObj = new ProductItem(product);
-            this.allProducts.push(productObj);
+            // this.allProducts.push(productObj);
             block.insertAdjacentHTML("beforeend", productObj.render());
         }
-    }
-
-    getSum() {
-        // let sum = 0;
-        // this.goods.forEach(item => {
-        //     sum += item.price;
-        // });
-        // reduce используется для последовательной обработки каждого элемента массива с сохранением промежуточного результата
-        let result = this.allProducts.reduce((acc, item) => acc + item.price, 0);
-        console.log(result);
-
     }
 }
 
 class ProductItem {
     constructor(product, img = 'https://via.placeholder.com/200x150') {
-        this.title = product.title;
+        this.title = product.product_name;
         this.price = product.price;
-        this.id = product.id;
+        this.id = product.id_product;
         this.img = img;
     }
     render() {
@@ -55,49 +52,66 @@ class ProductItem {
     }
 }
 
-let list = new ProductList();
-list.render();
-list.getSum();
+let list = new ProductsList();
+// list.render();
+// list.calcSum();
+
 
 class Basket {
+    // запускается контейнер, он содержит значение по умолчанию, который означает, что мы хотим вывести товары в этом элементе
+    constructor(container = '.menu-block') {
+        this.container = container;
+        this.basket = []; // массив товаров, заполнить массив на основе внешнего файла json
 
-    addGood() {
-
+        this._clickBasket();
+        this._getBasketItem()
+            .then(data => { // data - объект js
+                this.goods = data.contents;
+                this.render();
+            });
     }
-    removeGood() {
 
-    }
-
-    changeGood() {
-
+    _getBasketItem() {
+        return fetch(`${API}/getBasket.json`)
+            .then(result => result.json())
+            .catch(error => {
+                console.log(error);
+            })
     }
 
     render() {
+        const block = document.querySelector(this.container);
+        for (let product of this.goods) {
+            const profuctObj = new BasketItem();
+            block.insertAdjacentHTML('beforeend', profuctObj.render(product));
+        }
+    }
 
+    _clickBasket() {
+        document.querySelector('.btn-cart').addEventListener('click', () => {
+            document.querySelector(this.container).classList.toggle('invisible');
+        });
     }
 }
 
-class ElemBasket {
-    render() { }
+class BasketItem {
+    render(product, img = 'https://via.placeholder.com/50x50') {
+        return `<div class="cart-item" data-id="${product.id_product}">
+        <div class="product-bio">
+        <img src="${img}" alt="Some image">
+        <div class="product-desc">
+        <p class="product-title">${product.product_name}</p>
+        <p class="product-quantity">Quantity: ${product.quantity}</p>
+        <p class="product-single-price">${product.price} each</p>
+    </div>
+    </div>
+    <div class="right-block">
+        <p class="product-price">${product.quantity * product.price}</p>
+        <button class="del-btn" data-id="${product.id_product}">&times;</button>
+    </div>
+    </div> `
+    }
 }
 
-// const products = [
-//     { id: 1, title: 'Notebook', price: 2000 },
-//     { id: 2, title: 'Mouse', price: 20 },
-//     { id: 3, title: 'Keyboard', price: 200 },
-//     { id: 4, title: 'Gamepad', price: 50 },
-// ];
-// const renderProduct = (product, img = 'https://via.placeholder.com/200x150') => {
-//     return `<div class="product-item">
-//                 <img scr="${img}">
-//                 <h3>${product.title}</h3>
-//                 <p class="product__text">${product.price}$</p>
-//                 <button class="buy-btn">Купить</button>
-//             </div>`
-// };
-// const renderPage = list => {
-//     document.querySelector('.products').innerHTML =
-//         (list.map(product => renderProduct(product))).join('');
-// };
-// renderPage(products);
+const basketList = new Basket();
 
