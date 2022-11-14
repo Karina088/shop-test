@@ -42,7 +42,7 @@
         // другой вариант с добавлением кнопки
         let blockEl = document.querySelector('.text');
         document.querySelector('.replace').addEventListener('click', () => {
-            // меняю один кавычки на двойные, используя \B - граница слова в верх регистре
+            // меняю один кавычки на двойные, используя \B - не граница слова в верх регистре
             blockEl.textContent = blockEl.textContent.replace(/\B'|'\B/g, '"');
         })
 
