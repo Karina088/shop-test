@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <p>
+    <p class="text">
         One: 'Hi Mary.' Two: 'Oh, hi.'
         One: 'How are you doing?'
         Two: 'I'm doing alright. How about you?'
@@ -27,14 +27,24 @@
         Two: 'I'll see you next time.'
         One: 'Sure. Bye.'
     </p>
+    <button class="replace">Replace</button>
 
     <script>
-        let parEl = document.querySelector('p');
+        const parEl = document.querySelector('p');
         parEl.addEventListener('click', () => {
+            // метод replace в регулярных выражениях заменяет 
+            // в данном случае, я меняю одинарные кавычки на двойные и с флагом g - глобальный, меняю везде
             console.log(parEl.innerText.replace(/'/g, '"'));
+            // здесь я меняю одинарные на двойные кавычки, но там, где есть слова i'll, that's не меняю. Использую \s - space, tab
             console.log(parEl.innerText.replace(/^'|(\s)'|'(\s)|'$/g, '"'));
         });
 
+        // другой вариант с добавлением кнопки
+        let blockEl = document.querySelector('.text');
+        document.querySelector('.replace').addEventListener('click', () => {
+            // меняю один кавычки на двойные, используя \B - граница слова в верх регистре
+            blockEl.textContent = blockEl.textContent.replace(/\B'|'\B/g, '"');
+        })
 
     </script>
 </body>
