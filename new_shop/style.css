@@ -207,3 +207,33 @@ h3 {
     border-color: blueviolet;
     background-color: rgb(223, 255, 255);
 }
+
+.footer-menu {
+    display: flex;
+    margin-top: 160px;
+    padding-top: 14px;
+    height: 56px;
+    justify-content: space-between;
+
+}
+
+.footer__par {
+    margin-top: 12px;
+}
+
+footer {
+    padding: 0 calc(50% - 590px);
+    background-color: azure;
+    color: #524c4f;
+
+}
+
+.footer__img {
+    width: 32px;
+    border-radius: 16px;
+    background-color: azure;
+    margin-top: 8px;
+    margin-right: 6px;
+}
+
+.footer__img:hover {}
