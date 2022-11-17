@@ -31,45 +31,31 @@
                         </button>
                     </form>
 
-                    <button class="btn-cart" type="button">Корзина</button>
-                    <div class="menu-block invisible"></div>
-                    <!-- <div class="cart-block invisible">
-                        <div class="cart-item" data-id="123">
+                    <button class="btn-cart" type="button" @click="showCart = !showCart">Корзина</button>
+                    <div class="cart-block" v-show="showCart">
+                        <p v-if="!cartItems.length">Cart is empty</p>
+                        <div class="cart-item" v-for="item of cartItems" :key="item.id_product">
                             <div class="product-bio">
-                                <img src="https://placehold.it/50x100" alt="Some image">
+                                <img :scr="imgCart" alt="Some image">
                                 <div class="product-desc">
-                                    <p class="product-title">Ноутбук</p>
-                                    <p class="product-quantity">Quantity: 1</p>
-                                    <p class="product-single-price">$45600 each</p>
+                                    <p class="product-title">{{ item.product_name }}</p>
+                                    <p class="product-quantity">Quantity: {{ item.quantity }}</p>
+                                    <p class="product-single-price">$ {{ item.price }}</p>
                                 </div>
                             </div>
                             <div class="right-block">
-                                <p class="product-price">$45600</p>
-                                <button class="del-btn" data-id="123">×</button>
+                                <p class="product-price">{{ item.quantity * item.price }}</p>
+                                <button class="del-btn" @click="remove(item)">×</button>
                             </div>
                         </div>
-                        <div class="cart-item" data-id="456">
-                            <div class="product-bio">
-                                <img src="https://placehold.it/50x100" alt="Some image">
-                                <div class="product-desc">
-                                    <p class="product-title">Мышка</p>
-                                    <p class="product-quantity">Quantity: 1</p>
-                                    <p class="product-single-price">$1000 each</p>
-                                </div>
-                            </div>
-                            <div class="right-block">
-                                <p class="product-price">$1000</p>
-                                <button class="del-btn" data-id="456">×</button>
-                            </div>
-                        </div>
-                    </div> -->
+                    </div>
                 </div>
             </nav>
         </header>
         <main>
             <div class="products">
                 <div class="product-item" v-for="product of filtered" :key="product.id_product">
-                    <img :src="imgCatalog" alt="Some img">
+                    <img :src="imgProduct" alt="Some img">
                     <div class="desc">
                         <h3>{{product.product_name}}</h3>
                         <p class="product__text">{{product.price}} $</p>
