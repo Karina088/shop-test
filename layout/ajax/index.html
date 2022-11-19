@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        // данный скирт не работает локально, его нужно запускать на стороне сервера (live server)
+        // text - объект с исходником нашего файла,
+        // json() - функция, которая преобразует наш исходник в объект 
+        // или массив объектов и возвращает промисы
+        fetch("phone.json")
+            .then(text => text.json())
+            // data - массив объектов
+            .then(data => {
+                data.forEach(item => {
+                    document.querySelector('div').insertAdjacentHTML('beforeend', `<p>${item.name} имеет телефон ${item.phone}</p>`);
+                });
+            })
+
+    </script>
+
+</body>
+
+</html>

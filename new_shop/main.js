@@ -1,32 +1,194 @@
 'use strict';
-// при выводе массива по умолчанию запускается метод join, который выводит запятые. Если ничего не хочу видеть при выводе массива клиенту ставля пустые кавычки join(''). Если я хочу выводить с новой строки - join('\n')
-const products = [
-    { id: 1, title: 'Notebook', price: 2000 },
-    { id: 2, title: 'Mouse', price: 20 },
-    { id: 3, title: 'Keyboard', price: 200 },
-    { id: 4, title: 'Gamepad', price: 50 },
-];
-//Функция для формирования верстки каждого товара
-//Добавить в выводе изображение
 
-// product - это все параметры объектов из массива products
-const renderProduct = (product, img = 'https://via.placeholder.com/200x150') => {
-    return `<div class="product-item">
-                <img scr="${img}">
-                <h3>${product.title}</h3>
-                <p>${product.price}$</p>
-                <button class="buy-btn">Купить</button>
-            </div>`
-};
+const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
 
-const renderPage = list => {
-    document.querySelector('.products').innerHTML =
-        (list.map(product => renderProduct(product))).join('');
-};
+const app = new Vue({
+    el: '#app',
+    data: {
+        userSearch: '',
+        showCart: false,
+        catalogUrl: '/catalogData.json',
+        cartUrl: '/getBasket.json',
+        cartItems: [],
+        filtered: [],
+        imgCart: 'https://via.placeholder.com/50x100',
+        products: [],
+        imgProduct: 'https://via.placeholder.com/200x150'
+    },
+    methods: {
+        getJson(url) {
+            return fetch(url)
+                .then(result => result.json())
+                .catch(error => {
+                    console.log(error);
+                })
+        },
+        addProduct(item) {
+            this.getJson(`${API}/addToBasket.json`)
+                .then(data => {
+                    if (data.result === 1) {
+                        let find = this.cartItems.find(el => el.id_product === item.id_product);
+                        if (find) {
+                            find.quantity++;
+                        } else {
+                            const prod = Object.assign({ quantity: 1 }, item);
+                            this.cartItems.push(prod);
+                        }
+                    }
+                })
+        },
+        remove(item) {
+            this.getJson(`${API}/deleteFromBasket.json`)
+                .then(data => {
+                    if (data.result === 1) {
+                        if (item.quantity > 1) {
+                            item.quantity--;
+                        } else {
+                            this.cartItems.splice(this.cartItems.indexOf(item), 1);
+                        }
+                    }
+                })
+        },
+        filter() {
+            let regexp = new RegExp(this.userSearch, 'i');
+            this.filtered = this.products.filter(el => regexp.text(el.product_name));
+        }
+    },
 
-renderPage(products);
+    mounted() {
+        this.getJson(`${API + this.cartUrl}`)
+            .then(data => {
+                for (let item of data.contents) {
+                    this.cartItems.push(item);
+                }
+            });
+        this.getJson(`${API + this.catalogUrl}`)
+            .then(data => {
+                for (let item of data) {
+                    this.$data.products.push(item);
+                    this.$data.filtered.push(item);
+                }
+            });
+        this.getJson(`getProducts.json`)
+            .then(data => {
+                for (let item of data) {
+                    this.products.push(item); // статичный, постоянный массив
+                    this.filtered.push(item); // динамичный массив, зависящий от товаров
+                }
+            })
+    }
+});
 
-    // быстрее будет innerHTML, тк innerHTML() нужен, когда есть цикл
-    // const renderPage = list => {
-    //     document.querySelector('.products').innerHTML('beforeend', list.map(product => renderProduct(product)).join(''));
-    // };
+// class ProductsList {
+//     constructor(container = '.products') {
+//         this.container = container;
+//         this.goods = [];
+//         // this.allProducts = [];
+//         this._getProducts()
+//             .then(data => { // data - объект js
+//                 this.goods = data;
+//                 this.render()
+//             });
+//     }
+
+//     _getProducts() {
+//         return fetch(`${API}/catalogData.json`)
+//             .then(result => result.json())
+//             .catch(error => {
+//                 console.error(error);
+//             });
+//     }
+
+//     calcSum() {
+//         return this.allProducts.reduce((acc, item) => acc + item.price, 0);
+//     }
+//     render() {
+//         const block = document.querySelector(this.container);
+//         for (let product of this.goods) {
+//             const productObj = new ProductItem(product);
+//             // this.allProducts.push(productObj);
+//             block.insertAdjacentHTML("beforeend", productObj.render());
+//         }
+//     }
+// }
+
+// class ProductItem {
+//     constructor(product, img = 'https://via.placeholder.com/200x150') {
+//         this.title = product.product_name;
+//         this.price = product.price;
+//         this.id = product.id_product;
+//         this.img = img;
+//     }
+//     render() {
+//         return `<div class="product-item" data-id="${this.id}">
+//                 <img src="${this.img}" alt="photo">
+//                 <h3>${this.title}</h3>
+//                 <p class="product__text">${this.price}</p>
+//                 <button class="buy-btn">Купить</button>
+//             </div>`
+//     }
+// }
+
+// let list = new ProductsList();
+// // list.render();
+// // list.calcSum();
+
+
+// class Basket {
+//     // запускается контейнер, он содержит значение по умолчанию, который означает, что мы хотим вывести товары в этом элементе
+//     constructor(container = '.menu-block') {
+//         this.container = container;
+//         this.basket = []; // массив товаров, заполнить массив на основе внешнего файла json
+
+//         this._clickBasket();
+//         this._getBasketItem()
+//             .then(data => { // data - объект js
+//                 this.goods = data.contents;
+//                 this.render();
+//             });
+//     }
+
+//     _getBasketItem() {
+//         return fetch(`${API}/getBasket.json`)
+//             .then(result => result.json())
+//             .catch(error => {
+//                 console.log(error);
+//             })
+//     }
+
+//     render() {
+//         const block = document.querySelector(this.container);
+//         for (let product of this.goods) {
+//             const profuctObj = new BasketItem();
+//             block.insertAdjacentHTML('beforeend', profuctObj.render(product));
+//         }
+//     }
+
+//     _clickBasket() {
+//         document.querySelector('.btn-cart').addEventListener('click', () => {
+//             document.querySelector(this.container).classList.toggle('invisible');
+//         });
+//     }
+// }
+
+// class BasketItem {
+//     render(product, img = 'https://via.placeholder.com/50x50') {
+//         return `<div class="cart-item" data-id="${product.id_product}">
+//         <div class="product-bio">
+//         <img src="${img}" alt="Some image">
+//         <div class="product-desc">
+//         <p class="product-title">${product.product_name}</p>
+//         <p class="product-quantity">Quantity: ${product.quantity}</p>
+//         <p class="product-single-price">${product.price} each</p>
+//     </div>
+//     </div>
+//     <div class="right-block">
+//         <p class="product-price">${product.quantity * product.price}</p>
+//         <button class="del-btn" data-id="${product.id_product}">&times;</button>
+//     </div>
+//     </div> `
+//     }
+// }
+
+// const basketList = new Basket();
+

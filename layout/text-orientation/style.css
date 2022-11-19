@@ -1,0 +1,8 @@
+.text {
+    height: 100%;
+    display: inline-block;
+    writing-mode: vertical-lr;
+    letter-spacing: -4px;
+    text-orientation: upright;
+    font-size: 26px;
+}

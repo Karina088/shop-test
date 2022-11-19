@@ -132,8 +132,6 @@ body {
     box-shadow: 10px 5px 5px rgb(91, 91, 118);
     display: grid;
     grid-template-columns: repeat(auto-fit 1fr);
-
-
 }
 
 .header_cart {

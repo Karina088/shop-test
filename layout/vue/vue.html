@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div v-for="item of products">
+            <p style="color: rgb(86, 39, 215);">Название товара: {{ item.title }}</p>
+            <p>Стоимость товара: {{ item.price }}</p>
+            <img width="400px" :src="item.img" :alt="item.title"><br><br>
+            <button @click="addProduct(item)">Добавить в корзину</button>
+        </div>
+        <hr>
+        <h1 v-if="cart.length">Корзина покупок</h1>
+        <div v-for="item of cart">
+            <h4>Название товара: {{ item.title }}</h3>
+                <p>Стоимость товара: {{ item.price }}</p>
+                <p>Количество товаров: {{ item.quantity }}</p>
+                <p style="color:rgb(105, 18, 54)">Общая сумма: {{ item.quantity * item.price }}</p>
+                <hr>
+        </div>
+
+        <hr>
+        Hello, {{ name }}! <br>
+        <a :href="link">Перейти в поисковик</a>
+        <!-- <button @click="counter++">OK {{ counter }}</button>
+         -->
+        <button @click="increase(forCounter)">OK {{ counter }}</button>
+        <p>{{ counter > 10 ? 'Значение счетчика больше 10' : 'Значение счетчика меньше либо равно 10' }}</p>
+        <br>
+        <h2>{{ hello() }}</h2>
+        <div v-show="show">
+            <p v-if="show">Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+            <p v-else>Lorem ipsum dolor.</p>
+        </div>
+        <button @click="show=!show">Show/Hide</button>
+        <p @mousemove="setCoordinates($event)">При наведении курсора мыши на данный текст, вы увидите координаты вашего
+            курсора мышки:
+            {{ x }} / {{ y }}, <span @mousemove.stop>Данный текст не реагирует на движение мышки</span>
+        </p>
+        <input type="text" v-model.lazy="name">
+        <div v-html="completeEl"></div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8"></script>
+
+    <script>
+        const app = new Vue(
+            {
+                el: '#app',
+                data: {
+                    name: 'Аглая',
+                    link: 'https://google.com',
+                    counter: 0,
+                    forCounter: 2,
+                    show: false,
+                    x: 0,
+                    y: 0,
+                    completeEl: '<a href="https://yandex.ru">Яндекс</a>',
+                    products: [],
+                    cart: []
+                },
+                methods: {
+                    hello() {
+                        return `Добрый день, ${this.name}!`
+                    },
+                    addProduct(item) {
+                        const findEl = this.cart.find(product => item.id == product.id);
+                        if (findEl) {
+                            findEl.quantity++;
+                        } else {
+                            // const cartItem = Object.assign({ quantity: 1 }, item);
+                            // this.cart.push(cartItem);
+                            // версия, которая будет работать в любой версии Vue
+                            this.$set(item, 'quantity', 1);
+                            this.cart.push(item);
+                        }
+                        // console.log(this.cart);
+                    },
+                    increase(x) {
+                        this.counter += x;
+                    },
+                    setCoordinates(e) {
+                        this.x = e.clientX,
+                            this.y = e.clientY;
+                    }
+                },
+                mounted() {
+                    this.products = [
+                        {
+                            id: 1,
+                            title: 'Audi',
+                            price: 1000,
+                            img: 'img/audi.jpg'
+                        },
+                        {
+                            id: 2,
+                            title: 'BMW',
+                            price: 1300,
+                            img: 'img/bmw.jpg'
+                        },
+                        {
+                            id: 3,
+                            title: 'Volkswagen',
+                            price: 2200,
+                            img: 'img/vw.jpg'
+                        }
+                    ]
+                },
+            }
+        );
+    </script>
+</body>
+
+</html>
