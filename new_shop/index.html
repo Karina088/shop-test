@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="normalize.css">
@@ -15,10 +15,10 @@
         <header>
             <nav class="menu center">
                 <a href="#" class="menu__logo"><img src="img/logo.png" alt="logo" class="menu-logo"></a>
-                <div class="menu-right">
+                <div class="cart">
                     <form action="#" class="search-form" @submit.prevent="filter">
                         <input type="text" class="search-field" v-model="userSearch">
-                        <button class="btn-search" type="submit">
+                        <button type="submit" class="btn-search">
                             <i class="fas fa-search"></i>
                             <svg class="svg-inline--fa fa-search fa-w-16" aria-hidden="true" focusable="false"
                                 data-prefix="fas" data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg"
@@ -64,18 +64,19 @@
                 </div>
             </div>
         </main>
-        <footer>
-            <div class="footer-menu">
-                <ul class="footer__list">
-                    <a href="https://web.telegram.org/?legacy=1#/login" target="_blank"><img class="footer__img"
-                            src="img/tel-icon.jpg" alt="icon"></a>
-                    <a href="#"><img class="footer__img" src="img/twitter-icon.png" alt="icon"></a>
-                    <a href="#"> <img class="footer__img" src="img/whatsapp-icon.png" alt="icon"></a>
-                </ul>
-                <p class="footer__par">© Все права защищены.</p>
-            </div>
-        </footer>
     </div>
+    <footer>
+        <div class="footer-menu">
+            <ul class="footer__list">
+                <a href="https://web.telegram.org/?legacy=1#/login" target="_blank"><img class="footer__img"
+                        src="img/tel-icon.jpg" alt="icon"></a>
+                <a href="#"><img class="footer__img" src="img/twitter-icon.png" alt="icon"></a>
+                <a href="#"> <img class="footer__img" src="img/whatsapp-icon.png" alt="icon"></a>
+            </ul>
+            <p class="footer__par">© Все права защищены.</p>
+        </div>
+    </footer>
+
 
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"
         integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP"

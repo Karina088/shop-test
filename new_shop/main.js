@@ -8,7 +8,7 @@ const app = new Vue({
         userSearch: '',
         showCart: false,
         catalogUrl: '/catalogData.json',
-        cartUrl: '/getBasket.jcon',
+        cartUrl: '/getBasket.json',
         cartItems: [],
         filtered: [],
         imgCart: 'https://via.placeholder.com/50x100',
@@ -50,7 +50,7 @@ const app = new Vue({
                 })
         },
         filter() {
-            const regexp = new RegExp(this.userSearch, 'i');
+            let regexp = new RegExp(this.userSearch, 'i');
             this.filtered = this.products.filter(el => regexp.text(el.product_name));
         }
     },
@@ -72,12 +72,12 @@ const app = new Vue({
         this.getJson(`getProducts.json`)
             .then(data => {
                 for (let item of data) {
-                    this.products.push(item);
-                    this.filtered.push(item);
+                    this.products.push(item); // статичный, постоянный массив
+                    this.filtered.push(item); // динамичный массив, зависящий от товаров
                 }
             })
     }
-})
+});
 
 // class ProductsList {
 //     constructor(container = '.products') {

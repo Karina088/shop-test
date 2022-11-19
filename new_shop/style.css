@@ -1,7 +1,15 @@
 * {
     margin: 0;
     padding: 0;
+
+}
+
+body {
     font-family: Arial, Helvetica, sans-serif;
+}
+
+button:focus {
+    outline: none;
 }
 
 .menu {
@@ -38,7 +46,7 @@
     border-color: blueviolet;
 }
 
-.menu-right {
+.cart {
     position: relative;
 }
 
@@ -144,7 +152,7 @@
 .products {
     display: grid;
     justify-content: space-around;
-    column-gap: 30px;
+    column-gap: 22px;
     grid-template-columns: repeat(auto-fit, 200px);
     grid-template-rows: 1fr;
     padding: 40px 80px;
@@ -160,6 +168,12 @@
     border: 0.4px solid #abeef6;
     box-shadow: 0 0 5px #474747;
 }
+
+/* .desc {
+    border: 1px solid #c0c0c040;
+    padding: 15px
+} */
+
 
 .product-item:hover {
     transform: scale(1.1);
