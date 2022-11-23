@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-
 }
 
 body {
@@ -213,7 +212,7 @@ h3 {
     margin-bottom: 12px;
 }
 
-.buy-btn:hover,
+`<div><button class="btn-cart" type="button"@click="showCart = !showCart"></button><div class="cart-block" v-show="showCart"><cart-item v-for="item of cartItems" :key="item.id_product" :img="imgCart" :cart-item="item"@remove="remove"></cart-item></div></div>` .buy-btn:hover,
 .del-btn:hover {
     color: blueviolet;
     border-color: blueviolet;

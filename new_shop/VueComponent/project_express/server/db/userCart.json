@@ -1,0 +1,30 @@
+{
+    "amount": 46600,
+    "countGoods": 2,
+    "contents": [
+        {
+            "quantity": 6,
+            "id_product": 1,
+            "product_name": "Букет из незабудок",
+            "price": 3500
+        },
+        {
+            "quantity": 5,
+            "id_product": 2,
+            "product_name": "Нежная корзина с орхидеями",
+            "price": 3000
+        },
+        {
+            "quantity": 2,
+            "id_product": 3,
+            "product_name": "Мужской букет",
+            "price": 4560
+        },
+        {
+            "quantity": 3,
+            "id_product": 4,
+            "product_name": "Авторская композиция",
+            "price": 1200
+        }
+    ]
+}
