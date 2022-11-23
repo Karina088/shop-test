@@ -18,7 +18,45 @@ button:focus {
 .logo {
     text-transform: uppercase;
     font-weight: bold;
+}
 
+.logo {
+    background: linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: rainbow 20s ease infinite;
+    animation: rainbow 20s ease infinite;
+    font-size: 25px;
+    line-height: 25px;
+}
+
+@-webkit-keyframes rainbow {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@keyframes rainbow {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
 }
 
 .btn-cart {
@@ -41,12 +79,6 @@ button:focus {
     align-self: center;
 }
 
-/*.products {*/
-/*display: flex;*/
-/*justify-content: space-between;*/
-/*flex-wrap: wrap;*/
-/*padding: 40px 80px;*/
-/*}*/
 .products {
     column-gap: 22px;
     display: grid;
@@ -132,8 +164,6 @@ img {
 .buy-btn,
 .del-btn {
     margin-top: 18px;
-    /* background-color: #2f2a2d;
-     */
     background-color: darkgrey;
     padding: 6px 24px;
     border: 1px solid transparent;
