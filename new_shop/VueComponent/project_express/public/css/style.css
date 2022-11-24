@@ -21,13 +21,13 @@ button:focus {
 }
 
 .logo {
-    background: linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet);
+    background: linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet, teal, LIME, crimson, purple);
     background-size: 400% 400%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -webkit-animation: rainbow 20s ease infinite;
     animation: rainbow 20s ease infinite;
-    font-size: 25px;
+    font-size: 26px;
     line-height: 25px;
 }
 
@@ -80,7 +80,7 @@ button:focus {
 }
 
 .products {
-    column-gap: 22px;
+    column-gap: 30px;
     display: grid;
     grid-template-columns: repeat(auto-fit, 250px);
     grid-template-rows: 1fr;

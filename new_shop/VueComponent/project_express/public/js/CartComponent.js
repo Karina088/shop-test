@@ -13,6 +13,7 @@ Vue.component('cart', {
         this.$parent.getJson(`/api/cart`)
             .then(data => {
                 for (let item of data.contents) {
+                    item.imgPath = `img/s${item.id_product}.jpg`;
                     this.$data.cartItems.push(item);
                 }
             });
@@ -66,7 +67,7 @@ Vue.component('cart', {
     template: `<div>
 <img class="btn-cart" @click="showCart = !showCart" src="img/bask.png" alt="basket">
         <div class="cart-block" v-show="showCart">
-            <cart-item v-for="item of cartItems" :key="item.id_product" :img="imgCart" :cart-item="item" @remove="remove">
+            <cart-item v-for="item of cartItems" :key="item.id_product" :img="item.imgPath" :cart-item="item" @remove="remove">
             </cart-item>
         </div>
         </div>

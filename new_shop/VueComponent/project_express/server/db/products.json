@@ -1,7 +1,6 @@
 [
   {
     "id_product": 1,
-    "img": "imag/1.jpeg",
     "product_name": "Букет из незабудок",
     "price": 3500
   },
@@ -19,5 +18,25 @@
     "id_product": 4,
     "product_name": "Авторская композиция",
     "price": 1200
+  },
+  {
+    "id_product": 5,
+    "product_name": "Композиция на кензане",
+    "price": 4620
+  },
+  {
+    "id_product": 6,
+    "product_name": "Икебана",
+    "price": 2200
+  },
+  {
+    "id_product": 7,
+    "product_name": "Флорариум",
+    "price": 12990
+  },
+  {
+    "id_product": 8,
+    "product_name": "Икебана",
+    "price": 3400
   }
 ]

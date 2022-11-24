@@ -3,28 +3,67 @@
     "countGoods": 2,
     "contents": [
         {
-            "quantity": 6,
+            "quantity": 1,
             "id_product": 1,
             "product_name": "Букет из незабудок",
-            "price": 3500
-        },
-        {
-            "quantity": 5,
-            "id_product": 2,
-            "product_name": "Нежная корзина с орхидеями",
-            "price": 3000
-        },
-        {
-            "quantity": 2,
-            "id_product": 3,
-            "product_name": "Мужской букет",
-            "price": 4560
+            "price": 3500,
+            "imgPath": "img/1.jpg"
         },
         {
             "quantity": 3,
+            "id_product": 2,
+            "product_name": "Нежная корзина с орхидеями",
+            "price": 6000,
+            "imgPath": "img/2.jpg"
+        },
+        {
+            "quantity": 1,
+            "id_product": 3,
+            "product_name": "Мужской букет с антуриумом",
+            "price": 4560,
+            "imgPath": "img/3.jpg"
+        },
+        {
+            "quantity": 1,
             "id_product": 4,
             "product_name": "Авторская композиция",
-            "price": 1200
+            "price": 1200,
+            "imgPath": "img/4.jpg"
+        },
+        {
+            "quantity": 1,
+            "id_product": 8,
+            "product_name": "Икебана",
+            "price": 3400,
+            "imgPath": "img/8.jpg"
+        },
+        {
+            "quantity": 1,
+            "id_product": 7,
+            "product_name": "Флорариум",
+            "price": 12990,
+            "imgPath": "img/7.jpg"
+        },
+        {
+            "quantity": 4,
+            "id_product": 6,
+            "product_name": "Икебана",
+            "price": 2200,
+            "imgPath": "img/6.jpg"
+        },
+        {
+            "quantity": 1,
+            "id_product": 5,
+            "product_name": "Композиция на кензане",
+            "price": 4620,
+            "imgPath": "img/5.jpg"
+        },
+        {
+            "quantity": 1,
+            "id_product": 6,
+            "product_name": "Икебана",
+            "price": 2200,
+            "imgPath": "img/6.jpg"
         }
     ]
 }
