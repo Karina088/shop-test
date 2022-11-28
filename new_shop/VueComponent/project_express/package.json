@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bulma": "^0.9.4",
     "express": "^4.17.1",
     "vue": "^3.2.45",
     "webpack": "^5.75.0",
