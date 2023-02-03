@@ -1,3 +1,3 @@
 # shop-test
 
-page with cards
+web page with product cards
